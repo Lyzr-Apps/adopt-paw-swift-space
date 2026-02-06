@@ -6,7 +6,7 @@ import { IframeLoggerInit } from '@/components/IframeLoggerInit'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'PetPal - Find Your Perfect Pet Companion',
+  title: 'PetPal - Find Your Pawfect Pet Companion',
   description: 'Connect with rescue animals and shelters. AI-powered pet matching for your perfect adoption journey.',
 }
 

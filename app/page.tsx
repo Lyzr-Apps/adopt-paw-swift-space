@@ -744,7 +744,7 @@ export default function Home() {
         <div className="bg-gradient-to-br from-[#FF6B6B] to-[#FF8E8E] text-white px-6 py-12 text-center">
           <div className="max-w-2xl mx-auto">
             <FaPaw className="text-6xl mx-auto mb-4 opacity-90" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Find Your Perfect Companion</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Find Your Pawfect Companion</h1>
             <p className="text-lg mb-6 opacity-90">Connect with rescue animals waiting for their forever home</p>
             <div className="relative max-w-md mx-auto">
               <Input
