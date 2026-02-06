@@ -1,5 +1,5 @@
 {
-  "workflow_name": "PawMatch - Animal Adoption Platform",
+  "workflow_name": "PetPal - Animal Adoption Platform",
   "pattern": "Multiple Independent Agents",
   "agents": [
     {
