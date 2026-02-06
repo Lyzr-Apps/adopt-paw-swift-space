@@ -27,7 +27,11 @@ import {
   FaEye,
   FaPaperPlane,
   FaFilter,
-  FaStar
+  FaStar,
+  FaBuilding,
+  FaPhone,
+  FaEnvelope,
+  FaGlobe
 } from 'react-icons/fa'
 
 // TypeScript Interfaces based on test responses
@@ -69,6 +73,7 @@ interface Animal {
   gender: 'Male' | 'Female'
   location: string
   shelter: string
+  shelterId: string
   shelterVerified: boolean
   images: string[]
   description: string
@@ -76,6 +81,24 @@ interface Animal {
   behaviorNotes: string
   specialNeeds: boolean
   featured: boolean
+}
+
+interface Shelter {
+  id: string
+  name: string
+  location: string
+  city: string
+  state: string
+  distance: number // in miles
+  verified: boolean
+  phone: string
+  email: string
+  website: string
+  description: string
+  animalsAvailable: number
+  image: string
+  operatingHours: string
+  specialties: string[]
 }
 
 interface ChatMessage {
@@ -109,6 +132,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'San Francisco, CA',
     shelter: 'Happy Paws Rescue',
+    shelterId: 's1',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1633722715463-d30f4f325e24?w=800', 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=800'],
     description: 'Charlie is a friendly and energetic Golden Retriever who loves to play fetch and go on long walks. He\'s great with kids and other dogs.',
@@ -128,6 +152,7 @@ const mockAnimals: Animal[] = [
     gender: 'Female',
     location: 'Los Angeles, CA',
     shelter: 'Feline Friends Foundation',
+    shelterId: 's2',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=800'],
     description: 'Luna is a beautiful and vocal Siamese cat who loves attention and cuddles. She\'s very social and enjoys being around people.',
@@ -147,6 +172,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'San Diego, CA',
     shelter: 'Second Chance Dogs',
+    shelterId: 's3',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800'],
     description: 'Max is a loyal and calm Labrador mix looking for a forever home. He\'s great on walks and loves to relax at home.',
@@ -166,6 +192,7 @@ const mockAnimals: Animal[] = [
     gender: 'Female',
     location: 'Oakland, CA',
     shelter: 'Bay Area Cat Rescue',
+    shelterId: 's4',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800'],
     description: 'Bella is a sweet and independent cat who enjoys quiet time and gentle pets. Perfect for a calm household.',
@@ -185,6 +212,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'Sacramento, CA',
     shelter: 'Shepherd Sanctuary',
+    shelterId: 's5',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1568572933382-74d440642117?w=800'],
     description: 'Rocky is an intelligent and protective German Shepherd. He needs an experienced owner and a secure yard.',
@@ -204,6 +232,7 @@ const mockAnimals: Animal[] = [
     gender: 'Female',
     location: 'San Jose, CA',
     shelter: 'Kitten Kingdom',
+    shelterId: 's6',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1615789591457-74a63395c990?w=800'],
     description: 'Mittens is a playful Maine Coon kitten with a fluffy coat and sweet personality. She loves toys and treats.',
@@ -223,6 +252,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'Fresno, CA',
     shelter: 'Hound Haven',
+    shelterId: 's7',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1505628346881-b72b27e84530?w=800'],
     description: 'Duke is a friendly Beagle with a great nose and lots of energy. He loves sniffing adventures and treats.',
@@ -242,6 +272,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'Berkeley, CA',
     shelter: 'Senior Cats Society',
+    shelterId: 's8',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1529257414772-1960b7bea4eb?w=800'],
     description: 'Whiskers is a gentle senior cat looking for a quiet retirement home. He loves naps and gentle pets.',
@@ -261,6 +292,7 @@ const mockAnimals: Animal[] = [
     gender: 'Female',
     location: 'Palo Alto, CA',
     shelter: 'Small Breed Rescue',
+    shelterId: 's9',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=800'],
     description: 'Daisy is an adorable French Bulldog with a playful personality. She loves cuddles and short walks.',
@@ -280,6 +312,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'Santa Clara, CA',
     shelter: 'Black Cat Coalition',
+    shelterId: 's10',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=800'],
     description: 'Shadow is a sleek black cat with golden eyes. He\'s calm and loving, perfect for any home.',
@@ -299,6 +332,7 @@ const mockAnimals: Animal[] = [
     gender: 'Male',
     location: 'Sunnyvale, CA',
     shelter: 'Corgi Connection',
+    shelterId: 's11',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1597633425046-08f5110420f5?w=800'],
     description: 'Buddy is an energetic Corgi with short legs and a big personality. He loves to play and make friends.',
@@ -318,6 +352,7 @@ const mockAnimals: Animal[] = [
     gender: 'Female',
     location: 'Mountain View, CA',
     shelter: 'Luxe Pet Rescue',
+    shelterId: 's12',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=800'],
     description: 'Cleo is an elegant Persian cat with a luxurious coat. She needs daily grooming and a calm home.',
@@ -328,10 +363,220 @@ const mockAnimals: Animal[] = [
   }
 ]
 
+// Mock shelter data
+const mockShelters: Shelter[] = [
+  {
+    id: 's1',
+    name: 'Happy Paws Rescue',
+    location: '123 Market St, San Francisco, CA 94102',
+    city: 'San Francisco',
+    state: 'CA',
+    distance: 2.3,
+    verified: true,
+    phone: '(415) 555-0101',
+    email: 'info@happypawsrescue.org',
+    website: 'www.happypawsrescue.org',
+    description: 'Dedicated to rescuing and rehoming dogs and puppies in the Bay Area. We focus on providing comprehensive care and finding perfect matches.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's1').length,
+    image: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800',
+    operatingHours: 'Mon-Sat: 10am-6pm, Sun: 12pm-5pm',
+    specialties: ['Dogs', 'Puppies', 'Training Programs']
+  },
+  {
+    id: 's2',
+    name: 'Feline Friends Foundation',
+    location: '456 Sunset Blvd, Los Angeles, CA 90028',
+    city: 'Los Angeles',
+    state: 'CA',
+    distance: 5.8,
+    verified: true,
+    phone: '(310) 555-0202',
+    email: 'contact@felinefriends.org',
+    website: 'www.felinefriends.org',
+    description: 'Leading cat rescue specializing in Siamese and exotic breeds. We provide medical care, spay/neuter services, and lifetime support.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's2').length,
+    image: 'https://images.unsplash.com/photo-1415369629372-26f2fe60c467?w=800',
+    operatingHours: 'Tue-Sun: 11am-7pm, Closed Mon',
+    specialties: ['Cats', 'Exotic Breeds', 'FIV/FeLV Testing']
+  },
+  {
+    id: 's3',
+    name: 'Second Chance Dogs',
+    location: '789 Ocean View Dr, San Diego, CA 92101',
+    city: 'San Diego',
+    state: 'CA',
+    distance: 8.2,
+    verified: true,
+    phone: '(619) 555-0303',
+    email: 'help@secondchancedogs.org',
+    website: 'www.secondchancedogs.org',
+    description: 'Giving adult dogs a second chance at happiness. We specialize in behavioral rehabilitation and senior dog care.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's3').length,
+    image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800',
+    operatingHours: 'Mon-Fri: 9am-5pm, Sat-Sun: 10am-4pm',
+    specialties: ['Adult Dogs', 'Senior Care', 'Behavioral Training']
+  },
+  {
+    id: 's4',
+    name: 'Bay Area Cat Rescue',
+    location: '321 Telegraph Ave, Oakland, CA 94612',
+    city: 'Oakland',
+    state: 'CA',
+    distance: 3.1,
+    verified: true,
+    phone: '(510) 555-0404',
+    email: 'rescue@bayareacats.org',
+    website: 'www.bayareacats.org',
+    description: 'Community-focused cat rescue serving Oakland and surrounding areas. We prioritize TNR programs and indoor cat adoption.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's4').length,
+    image: 'https://images.unsplash.com/photo-1573865526739-10c1d3a1f0cc?w=800',
+    operatingHours: 'Wed-Sun: 12pm-6pm, Closed Mon-Tue',
+    specialties: ['Cats', 'TNR Programs', 'Community Outreach']
+  },
+  {
+    id: 's5',
+    name: 'Shepherd Sanctuary',
+    location: '555 Capitol Mall, Sacramento, CA 95814',
+    city: 'Sacramento',
+    state: 'CA',
+    distance: 12.5,
+    verified: true,
+    phone: '(916) 555-0505',
+    email: 'info@shepherdsanctuary.org',
+    website: 'www.shepherdsanctuary.org',
+    description: 'Breed-specific rescue focused on German Shepherds and working dogs. We provide specialized training and experienced handler matching.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's5').length,
+    image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800',
+    operatingHours: 'Sat-Sun: 10am-4pm, Weekday appointments available',
+    specialties: ['German Shepherds', 'Working Dogs', 'Advanced Training']
+  },
+  {
+    id: 's6',
+    name: 'Kitten Kingdom',
+    location: '999 Park Ave, San Jose, CA 95113',
+    city: 'San Jose',
+    state: 'CA',
+    distance: 4.7,
+    verified: true,
+    phone: '(408) 555-0606',
+    email: 'adopt@kittenkingdom.org',
+    website: 'www.kittenkingdom.org',
+    description: 'Kitten and young cat rescue with a focus on socialization and health. We offer adoption packages with starter supplies.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's6').length,
+    image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800',
+    operatingHours: 'Daily: 10am-8pm',
+    specialties: ['Kittens', 'Young Cats', 'Adoption Packages']
+  },
+  {
+    id: 's7',
+    name: 'Hound Haven',
+    location: '777 Shaw Ave, Fresno, CA 93710',
+    city: 'Fresno',
+    state: 'CA',
+    distance: 18.9,
+    verified: true,
+    phone: '(559) 555-0707',
+    email: 'contact@houndhaven.org',
+    website: 'www.houndhaven.org',
+    description: 'Specializing in hound breeds including Beagles, Bassets, and Bloodhounds. We emphasize scent work and mental stimulation.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's7').length,
+    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800',
+    operatingHours: 'Thu-Mon: 11am-5pm, Closed Tue-Wed',
+    specialties: ['Hound Breeds', 'Scent Training', 'Exercise Programs']
+  },
+  {
+    id: 's8',
+    name: 'Senior Cats Society',
+    location: '2020 University Ave, Berkeley, CA 94704',
+    city: 'Berkeley',
+    state: 'CA',
+    distance: 3.5,
+    verified: true,
+    phone: '(510) 555-0808',
+    email: 'care@seniorcats.org',
+    website: 'www.seniorcats.org',
+    description: 'Dedicated exclusively to senior cats (7+ years). We provide medical care, dental services, and lifetime support programs.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's8').length,
+    image: 'https://images.unsplash.com/photo-1573865526739-10c1d3a1f0cc?w=800',
+    operatingHours: 'Mon-Sat: 10am-5pm, Closed Sun',
+    specialties: ['Senior Cats', 'Medical Care', 'Hospice Foster']
+  },
+  {
+    id: 's9',
+    name: 'Small Breed Rescue',
+    location: '1500 El Camino Real, Palo Alto, CA 94306',
+    city: 'Palo Alto',
+    state: 'CA',
+    distance: 6.2,
+    verified: true,
+    phone: '(650) 555-0909',
+    email: 'info@smallbreedrescue.org',
+    website: 'www.smallbreedrescue.org',
+    description: 'Focused on small dog breeds perfect for apartments and urban living. We specialize in French Bulldogs, Pugs, and toy breeds.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's9').length,
+    image: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=800',
+    operatingHours: 'Tue-Sat: 12pm-7pm, Sun: 12pm-5pm, Closed Mon',
+    specialties: ['Small Breeds', 'Apartment Dogs', 'Urban Living']
+  },
+  {
+    id: 's10',
+    name: 'Black Cat Coalition',
+    location: '3100 Mission Blvd, Santa Clara, CA 95050',
+    city: 'Santa Clara',
+    state: 'CA',
+    distance: 5.0,
+    verified: true,
+    phone: '(408) 555-1010',
+    email: 'adopt@blackcatcoalition.org',
+    website: 'www.blackcatcoalition.org',
+    description: 'Breaking stereotypes and finding homes for black cats. We focus on education and celebrating these beautiful felines.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's10').length,
+    image: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=800',
+    operatingHours: 'Wed-Sun: 11am-6pm, Closed Mon-Tue',
+    specialties: ['Black Cats', 'Education Programs', 'Community Events']
+  },
+  {
+    id: 's11',
+    name: 'Corgi Connection',
+    location: '888 Mathilda Ave, Sunnyvale, CA 94085',
+    city: 'Sunnyvale',
+    state: 'CA',
+    distance: 4.3,
+    verified: true,
+    phone: '(408) 555-1111',
+    email: 'hello@corgiconnection.org',
+    website: 'www.corgiconnection.org',
+    description: 'Breed-specific rescue for Corgis and Corgi mixes. We provide training resources and connect with the local Corgi community.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's11').length,
+    image: 'https://images.unsplash.com/photo-1597633425046-08f5110420f5?w=800',
+    operatingHours: 'Sat-Sun: 10am-6pm, Weekday visits by appointment',
+    specialties: ['Corgis', 'Training Classes', 'Breed Community']
+  },
+  {
+    id: 's12',
+    name: 'Luxe Pet Rescue',
+    location: '2500 W El Camino Real, Mountain View, CA 94040',
+    city: 'Mountain View',
+    state: 'CA',
+    distance: 7.1,
+    verified: true,
+    phone: '(650) 555-1212',
+    email: 'contact@luxepetrescue.org',
+    website: 'www.luxepetrescue.org',
+    description: 'Specializing in purebred and high-maintenance breeds requiring special care. We provide grooming education and ongoing support.',
+    animalsAvailable: mockAnimals.filter(a => a.shelterId === 's12').length,
+    image: 'https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=800',
+    operatingHours: 'Mon-Sat: 10am-7pm, Sun: 11am-5pm',
+    specialties: ['Purebreds', 'Grooming Education', 'High-Maintenance Breeds']
+  }
+]
+
 export default function Home() {
-  const [currentScreen, setCurrentScreen] = useState<'home' | 'browse' | 'profile' | 'chat'>('home')
+  const [currentScreen, setCurrentScreen] = useState<'home' | 'browse' | 'shelters' | 'profile' | 'chat'>('home')
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null)
+  const [selectedShelter, setSelectedShelter] = useState<Shelter | null>(null)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
+  const [userLocation, setUserLocation] = useState('San Francisco, CA')
   const [searchQuery, setSearchQuery] = useState('')
   const [filterSpecies, setFilterSpecies] = useState<'all' | 'Dog' | 'Cat' | 'Rabbit'>('all')
   const [filterSize, setFilterSize] = useState<'all' | 'Small' | 'Medium' | 'Large'>('all')
@@ -1126,6 +1371,227 @@ export default function Home() {
     )
   }
 
+  // Shelters Screen Component
+  const SheltersScreen = () => {
+    const sortedShelters = [...mockShelters].sort((a, b) => a.distance - b.distance)
+
+    return (
+      <div className="pb-20 overflow-y-auto h-full bg-[#FFF9F5]">
+        {/* Header */}
+        <div className="bg-gradient-to-br from-[#2D5A4A] to-[#3a7259] text-white px-6 py-8">
+          <FaBuilding className="text-5xl mx-auto mb-3 opacity-90" />
+          <h1 className="text-3xl font-bold text-center mb-2">Shelters Near You</h1>
+          <div className="flex items-center justify-center text-sm opacity-90">
+            <FaMapMarkerAlt className="mr-2" />
+            <span>{userLocation}</span>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
+          <p className="text-sm text-gray-600 text-center">
+            {sortedShelters.length} verified shelters with {mockAnimals.length} animals available for adoption
+          </p>
+        </div>
+
+        {/* Shelters List */}
+        <div className="px-6 py-4 space-y-4">
+          {sortedShelters.map(shelter => {
+            const shelterAnimals = mockAnimals.filter(a => a.shelterId === shelter.id)
+            return (
+              <Card
+                key={shelter.id}
+                className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setSelectedShelter(shelter)}
+              >
+                <div className="flex gap-4 p-4">
+                  <div className="w-24 h-24 flex-shrink-0">
+                    <img src={shelter.image} alt={shelter.name} className="w-full h-full object-cover rounded-lg" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold text-gray-800 mb-1">{shelter.name}</h3>
+                        {shelter.verified && (
+                          <div className="flex items-center text-[#2D5A4A] text-xs mb-2">
+                            <FaCheckCircle className="mr-1" />
+                            <span>Verified</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-right ml-2">
+                        <div className="text-sm font-bold text-[#FF6B6B]">{shelter.distance} mi</div>
+                        <div className="text-xs text-gray-500">away</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center text-sm text-gray-600 mb-2">
+                      <FaMapMarkerAlt className="mr-1 flex-shrink-0" />
+                      <span className="truncate">{shelter.city}, {shelter.state}</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm">
+                      <span className="text-[#2D5A4A] font-medium">
+                        {shelter.animalsAvailable} {shelter.animalsAvailable === 1 ? 'animal' : 'animals'} available
+                      </span>
+                      {shelterAnimals.length > 0 && (
+                        <div className="flex -space-x-2">
+                          {shelterAnimals.slice(0, 3).map(animal => (
+                            <div key={animal.id} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
+                              <img src={animal.images[0]} alt={animal.name} className="w-full h-full object-cover" />
+                            </div>
+                          ))}
+                          {shelterAnimals.length > 3 && (
+                            <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-xs font-medium text-gray-600">
+                              +{shelterAnimals.length - 3}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="px-4 pb-3">
+                  <div className="flex gap-2 flex-wrap">
+                    {shelter.specialties.slice(0, 3).map(specialty => (
+                      <span key={specialty} className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  // Shelter Detail Modal
+  const ShelterDetailModal = ({ shelter }: { shelter: Shelter }) => {
+    const shelterAnimals = mockAnimals.filter(a => a.shelterId === shelter.id)
+
+    return (
+      <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center">
+        <div className="bg-white w-full md:max-w-3xl md:rounded-lg overflow-hidden max-h-[90vh] overflow-y-auto">
+          {/* Header Image */}
+          <div className="relative h-48">
+            <img src={shelter.image} alt={shelter.name} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <button
+              onClick={() => setSelectedShelter(null)}
+              className="absolute top-4 right-4 bg-white/90 p-3 rounded-full"
+            >
+              <FaTimes />
+            </button>
+            {shelter.verified && (
+              <div className="absolute top-4 left-4 bg-[#2D5A4A] text-white px-3 py-1 rounded-full flex items-center text-sm">
+                <FaCheckCircle className="mr-1" />
+                <span>Verified Shelter</span>
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="px-6 py-6">
+            {/* Name and Distance */}
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">{shelter.name}</h2>
+                <div className="flex items-center text-gray-600 mb-2">
+                  <FaMapMarkerAlt className="mr-2" />
+                  <span>{shelter.location}</span>
+                </div>
+                <div className="text-[#FF6B6B] font-medium">{shelter.distance} miles from you</div>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="mb-6">
+              <p className="text-gray-600">{shelter.description}</p>
+            </div>
+
+            {/* Contact Info */}
+            <div className="mb-6 space-y-3">
+              <h3 className="font-bold text-gray-800 mb-3">Contact Information</h3>
+              <div className="flex items-center text-gray-600">
+                <FaPhone className="mr-3 text-[#FF6B6B]" />
+                <a href={`tel:${shelter.phone}`} className="hover:text-[#FF6B6B]">{shelter.phone}</a>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <FaEnvelope className="mr-3 text-[#FF6B6B]" />
+                <a href={`mailto:${shelter.email}`} className="hover:text-[#FF6B6B]">{shelter.email}</a>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <FaGlobe className="mr-3 text-[#FF6B6B]" />
+                <a href={`https://${shelter.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B6B]">
+                  {shelter.website}
+                </a>
+              </div>
+            </div>
+
+            {/* Operating Hours */}
+            <div className="mb-6">
+              <h3 className="font-bold text-gray-800 mb-2">Operating Hours</h3>
+              <p className="text-gray-600">{shelter.operatingHours}</p>
+            </div>
+
+            {/* Specialties */}
+            <div className="mb-6">
+              <h3 className="font-bold text-gray-800 mb-3">Specialties</h3>
+              <div className="flex gap-2 flex-wrap">
+                {shelter.specialties.map(specialty => (
+                  <span key={specialty} className="px-3 py-1 bg-[#2D5A4A] text-white rounded-full text-sm">
+                    {specialty}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Available Animals */}
+            {shelterAnimals.length > 0 && (
+              <div className="mb-6">
+                <h3 className="font-bold text-gray-800 mb-3">
+                  Available Animals ({shelterAnimals.length})
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {shelterAnimals.map(animal => (
+                    <Card
+                      key={animal.id}
+                      className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+                      onClick={() => {
+                        setSelectedShelter(null)
+                        setSelectedAnimal(animal)
+                      }}
+                    >
+                      <div className="relative aspect-square">
+                        <img src={animal.images[0]} alt={animal.name} className="w-full h-full object-cover" />
+                      </div>
+                      <CardContent className="p-3">
+                        <h4 className="font-bold text-gray-800 text-sm">{animal.name}</h4>
+                        <p className="text-xs text-gray-600">{animal.breed}</p>
+                        <p className="text-xs text-gray-500 mt-1">{animal.age}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4">
+            <Button
+              onClick={() => setCurrentScreen('browse')}
+              className="w-full h-12 bg-[#FF6B6B] hover:bg-[#FF5555] text-white"
+            >
+              Browse All Animals at {shelter.name}
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   // Profile Screen Component
   const ProfileScreen = () => {
     const savedAnimals = mockAnimals.filter(a => favorites.has(a.id))
@@ -1277,7 +1743,8 @@ export default function Home() {
   const BottomNav = () => {
     const navItems = [
       { id: 'home' as const, icon: FaHome, label: 'Home' },
-      { id: 'browse' as const, icon: FaSearch, label: 'Browse' },
+      { id: 'browse' as const, icon: FaSearch, label: 'Animals' },
+      { id: 'shelters' as const, icon: FaBuilding, label: 'Shelters' },
       { id: 'chat' as const, icon: FaComments, label: 'Guide' },
       { id: 'profile' as const, icon: FaUser, label: 'Profile' },
     ]
@@ -1307,6 +1774,7 @@ export default function Home() {
       <div className="flex-1 overflow-hidden">
         {currentScreen === 'home' && <HomeScreen />}
         {currentScreen === 'browse' && <BrowseScreen />}
+        {currentScreen === 'shelters' && <SheltersScreen />}
         {currentScreen === 'chat' && <ChatScreen />}
         {currentScreen === 'profile' && <ProfileScreen />}
       </div>
@@ -1314,6 +1782,7 @@ export default function Home() {
       <BottomNav />
 
       {selectedAnimal && <AnimalProfileModal animal={selectedAnimal} />}
+      {selectedShelter && <ShelterDetailModal shelter={selectedShelter} />}
       {showMatchModal && <MatchModal />}
     </div>
   )
