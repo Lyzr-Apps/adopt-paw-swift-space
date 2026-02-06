@@ -163,9 +163,9 @@ const mockAnimals: Animal[] = [
   },
   {
     id: '3',
-    name: 'Tommy',
+    name: 'Bahadur',
     species: 'Dog',
-    breed: 'Labrador Retriever',
+    breed: 'Mudhol Hound',
     age: '3 years',
     ageCategory: 'Adult',
     size: 'Large',
@@ -175,9 +175,9 @@ const mockAnimals: Animal[] = [
     shelterId: 's3',
     shelterVerified: true,
     images: ['https://images.unsplash.com/photo-1552053831-71594a27632d?w=800'],
-    description: 'Tommy is a loyal and calm Labrador looking for a forever home. He is great for families and loves walks.',
+    description: 'Bahadur is a magnificent Mudhol Hound (Caravan Hound), a rare Indian sighthound from Karnataka. Intelligent, loyal and excellent for active families.',
     healthStatus: 'Vaccinated, neutered, microchipped',
-    behaviorNotes: 'Calm temperament, well-trained, good with children',
+    behaviorNotes: 'Athletic, intelligent, loyal, needs regular exercise, heat-tolerant',
     specialNeeds: false,
     featured: true
   },
