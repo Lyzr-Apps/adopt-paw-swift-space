@@ -1,0 +1,21 @@
+{
+  "workflow_name": "PawMatch - Animal Adoption Platform",
+  "pattern": "Multiple Independent Agents",
+  "agents": [
+    {
+      "name": "Pet Matching Agent",
+      "agent_id": "698583860ee88347863f0709",
+      "type": "Independent",
+      "purpose": "pet_matching",
+      "trigger": "Find My Match on Browse Screen"
+    },
+    {
+      "name": "Adoption Guide Agent",
+      "agent_id": "6985839e382ef8715224cf0f",
+      "type": "Independent",
+      "purpose": "adoption_guidance",
+      "trigger": "Chat interaction on Adoption Guide Screen"
+    }
+  ],
+  "created_at": "2026-02-06T00:00:00Z"
+}

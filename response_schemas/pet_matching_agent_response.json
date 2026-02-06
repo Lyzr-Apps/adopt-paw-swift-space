@@ -1,0 +1,123 @@
+{
+  "agent_name": "Pet Matching Agent",
+  "agent_id": "698583860ee88347863f0709",
+  "agent_purpose": "pet_matching",
+  "description": "Matches users with suitable pets based on lifestyle compatibility and preferences",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "recommended_animals": [
+        {
+          "animal_name": "string",
+          "species": "string",
+          "breed": "string",
+          "age": "string",
+          "compatibility_percentage": "number",
+          "match_reasons": [
+            "string"
+          ],
+          "care_considerations": [
+            "string"
+          ]
+        }
+      ],
+      "total_matches": "number"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "recommended_animals": [
+        {
+          "animal_name": "Charlie",
+          "species": "Dog",
+          "breed": "Cavalier King Charles Spaniel",
+          "age": "3 years",
+          "compatibility_percentage": 92,
+          "match_reasons": [
+            "Calm temperament suitable for apartment living",
+            "Medium-sized breed that adapts well to small spaces",
+            "Moderate exercise needs that align with your work-from-home schedule"
+          ],
+          "care_considerations": [
+            "Regular grooming required due to long coat",
+            "Prone to certain health issues like heart problems"
+          ]
+        },
+        {
+          "animal_name": "Bella",
+          "species": "Dog",
+          "breed": "French Bulldog",
+          "age": "2 years",
+          "compatibility_percentage": 88,
+          "match_reasons": [
+            "Low energy level makes her ideal for apartment living",
+            "Small to medium size that fits well in a smaller space",
+            "Generally calm demeanor"
+          ],
+          "care_considerations": [
+            "Needs monitoring for respiratory issues",
+            "Sensitive to extreme temperatures"
+          ]
+        }
+      ],
+      "total_matches": 2
+    },
+    "metadata": {
+      "agent_name": "Pet Matching Agent",
+      "timestamp": "2023-10-06T12:30:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T06:02:03.113865",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "recommended_animals": [
+        {
+          "animal_name": "Charlie",
+          "species": "Dog",
+          "breed": "Cavalier King Charles Spaniel",
+          "age": "3 years",
+          "compatibility_percentage": 92,
+          "match_reasons": [
+            "Calm temperament suitable for apartment living",
+            "Medium-sized breed that adapts well to small spaces",
+            "Moderate exercise needs that align with your work-from-home schedule"
+          ],
+          "care_considerations": [
+            "Regular grooming required due to long coat",
+            "Prone to certain health issues like heart problems"
+          ]
+        },
+        {
+          "animal_name": "Bella",
+          "species": "Dog",
+          "breed": "French Bulldog",
+          "age": "2 years",
+          "compatibility_percentage": 88,
+          "match_reasons": [
+            "Low energy level makes her ideal for apartment living",
+            "Small to medium size that fits well in a smaller space",
+            "Generally calm demeanor"
+          ],
+          "care_considerations": [
+            "Needs monitoring for respiratory issues",
+            "Sensitive to extreme temperatures"
+          ]
+        }
+      ],
+      "total_matches": 2
+    },
+    "metadata": {
+      "agent_name": "Pet Matching Agent",
+      "timestamp": "2023-10-06T12:30:00Z"
+    }
+  },
+  "test_passed": true
+}

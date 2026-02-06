@@ -1,0 +1,29 @@
+{
+  "agent_name": "Adoption Guide Agent",
+  "agent_id": "6985839e382ef8715224cf0f",
+  "test_message": "I'm adopting my first medium-sized dog. How should I prepare my home and what supplies do I need?",
+  "expected_purpose": "Guide first-time adopters through preparation and post-adoption phases",
+  "timestamp": "2026-02-06T06:02:14.724001",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "guidance_message": "Congratulations on your decision to adopt a medium-sized dog! Preparing your home for your new furry friend is an exciting process. Here are some key steps and supplies you should consider to ensure a smooth transition for both you and your dog.",
+      "actionable_tips": [
+        "Create a dedicated space for your dog with a comfortable bed, toys, and bowls for food and water.",
+        "Dog-proof your home by removing hazards, such as electrical cords and toxic plants, and ensuring that any breakable items are out of reach.",
+        "Stock up on essential supplies like a leash, collar with ID tags, food and water dishes, high-quality dog food, grooming tools, and waste bags."
+      ],
+      "relevant_resources": [
+        "resource1 - 'Preparing Your Home for a Dog: Tips and Essentials' guide on PawMatch",
+        "resource2 - Online pet supply stores like Chewy or Petco for convenient shopping"
+      ]
+    },
+    "metadata": {
+      "agent_name": "Adoption Guide Agent",
+      "timestamp": "2023-10-02T12:00:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"guidance_message\": \"Congratulations on your decision to adopt a medium-sized dog! Preparing your home for your new furry friend is an exciting process. Here are some key steps and supplies you should consider to ensure a smooth transition for both you and your dog.\",\n    \"actionable_tips\": [\n      \"Create a dedicated space for your dog with a comfortable bed, toys, and bowls for food and water.\",\n      \"Dog-proof your home by removing hazards, such as electrical cords and toxic plants, and ensuring that any breakable items are out of reach.\",\n      \"Stock up on essential supplies like a leash, collar with ID tags, food and water dishes, high-quality dog food, grooming tools, and waste bags.\"\n    ],\n    \"relevant_resources\": [\n      \"resource1 - 'Preparing Your Home for a Dog: Tips and Essentials' guide on PawMatch\",\n      \"resource2 - Online pet supply stores like Chewy or Petco for convenient shopping\"\n    ]\n  },\n  \"metadata\": {\n    \"agent_name\": \"Adoption Guide Agent\",\n    \"timestamp\": \"2023-10-02T12:00:00Z\"\n  }\n}"
+}

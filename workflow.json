@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "User Input",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "pet_matching_agent",
+      "type": "Agent",
+      "label": "Pet Matching Agent",
+      "nodeCategory": "agent",
+      "agent_id": "698583860ee88347863f0709"
+    },
+    {
+      "id": "adoption_guide_agent",
+      "type": "Agent",
+      "label": "Adoption Guide Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6985839e382ef8715224cf0f"
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "pet_matching_agent"
+    },
+    {
+      "source": "input_node",
+      "target": "adoption_guide_agent"
+    }
+  ]
+}
